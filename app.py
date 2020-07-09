@@ -27,10 +27,11 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH ='model_resnet50.h5'
+MODEL_PATH ='model_vgg19.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
+
 
 
 
@@ -53,11 +54,9 @@ def model_predict(img_path, model):
     preds = model.predict(x)
     preds=np.argmax(preds, axis=1)
     if preds==0:
-        preds="The Car IS Audi"
-    elif preds==1:
-        preds="The Car is Lamborghini"
+        preds="The Person is Infected With Pneumonia"
     else:
-        preds="The Car Is Mercedes"
+        preds="The Person is not Infected With Pneumonia"
     
     
     return preds
